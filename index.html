@@ -7,63 +7,83 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>升温游戏</title>
 <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1210">
 <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0a0f;--card-bg:#141420;--gold:#c9a96e;--gold-dim:rgba(201,169,110,0.5);--red:#8b3a3a;--red-bright:#b84545;--text:#e8e0d5;--text-dim:#9a9488}
+:root{--bg:#1a1210;--card1:#2c1d16;--card2:#211410;--gold:#d8b08c;--gold-dim:rgba(216,176,140,.45);--rose:#e8a8a2;--rose-deep:#c97a72;--ember:#e09a64;--red:#a04a48;--red-bright:#c25a55;--text:#f4e9e1;--text-dim:#a8918a}
 html,body{height:100%;overflow:hidden}
 body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:center;user-select:none;-webkit-user-select:none}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(139,58,58,.08) 0%,transparent 70%);pointer-events:none}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 90% 55% at 50% 18%,rgba(224,154,100,.13) 0%,transparent 65%),radial-gradient(ellipse 80% 50% at 50% 105%,rgba(201,122,114,.10) 0%,transparent 70%);pointer-events:none;animation:flk 7s ease-in-out infinite}
+@keyframes flk{0%,100%{opacity:.8}40%{opacity:1}60%{opacity:.88}}
+.embers i{position:fixed;bottom:-12px;width:4px;height:4px;border-radius:50%;background:rgba(224,154,100,.55);filter:blur(.5px);animation:rise linear infinite;pointer-events:none}
+.embers i:nth-child(1){left:12%;animation-duration:11s;animation-delay:0s}
+.embers i:nth-child(2){left:28%;animation-duration:14s;animation-delay:3s;width:3px;height:3px}
+.embers i:nth-child(3){left:46%;animation-duration:10s;animation-delay:6s}
+.embers i:nth-child(4){left:62%;animation-duration:15s;animation-delay:1.5s;width:3px;height:3px}
+.embers i:nth-child(5){left:78%;animation-duration:12s;animation-delay:4.5s}
+.embers i:nth-child(6){left:90%;animation-duration:16s;animation-delay:8s;width:2px;height:2px}
+@keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:.7}50%{transform:translateY(-55vh) translateX(14px);opacity:.45}100%{transform:translateY(-108vh) translateX(-10px);opacity:0}}
 .pg{display:none;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:420px;padding:24px;min-height:100vh;min-height:100dvh}
 .pg.on{display:flex}
-.t1{font-size:40px;letter-spacing:.08em;color:var(--gold);margin-bottom:4px}
-.t2{font-size:14px;color:var(--text-dim);margin-bottom:40px;letter-spacing:.15em}
+.t1{font-size:44px;letter-spacing:.12em;color:var(--rose);margin-bottom:6px;text-shadow:0 0 28px rgba(232,168,162,.35)}
+.t2{font-size:13px;color:var(--text-dim);margin-bottom:36px;letter-spacing:.2em}
 .t3{font-size:12px;color:var(--text-dim);letter-spacing:.1em;margin-bottom:12px}
-.lvs{display:flex;gap:8px;margin-bottom:40px;flex-wrap:wrap;justify-content:center}
-.lb{padding:12px 18px;border:1px solid rgba(201,169,110,.3);border-radius:50px;background:transparent;color:var(--text-dim);font-size:14px;font-family:inherit;cursor:pointer;transition:all .25s}
-.lb.sel{background:rgba(201,169,110,.12);border-color:var(--gold);color:var(--gold)}
-.lb.s4.sel{background:rgba(139,58,58,.2);border-color:var(--red-bright);color:var(--red-bright)}
-.bs{padding:16px 64px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--red),var(--red-bright));color:#fff;font-size:18px;font-family:inherit;letter-spacing:.1em;cursor:pointer;transition:all .25s;box-shadow:0 4px 24px rgba(139,58,58,.3)}
+.lvs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;justify-content:center}
+.lb{padding:12px 18px;border:1px solid rgba(216,176,140,.3);border-radius:50px;background:transparent;color:var(--text-dim);font-size:14px;font-family:inherit;cursor:pointer;transition:all .25s}
+.lb.sel{background:rgba(224,154,100,.14);border-color:var(--ember);color:var(--ember);box-shadow:0 0 16px rgba(224,154,100,.18)}
+.bs{margin-top:22px;padding:16px 64px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--red),var(--rose-deep));color:#fff;font-size:18px;font-family:inherit;letter-spacing:.12em;cursor:pointer;transition:all .25s;box-shadow:0 6px 28px rgba(201,122,114,.35)}
 .bs:active{transform:scale(.96)}
-.gh{width:100%;display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.li{font-size:10px;letter-spacing:.12em;color:var(--gold-dim);padding:4px 10px;border:1px solid var(--gold-dim);border-radius:50px;white-space:nowrap}
-.pb{flex:1;height:2px;background:rgba(255,255,255,.08);border-radius:1px;overflow:hidden}
-.pf{height:100%;background:var(--gold);transition:width .4s}
-.pt{font-size:12px;color:var(--text-dim);min-width:40px;text-align:right}
-.cc{font-size:11px;color:var(--text-dim);margin-bottom:16px;letter-spacing:.05em}
-.cs{perspective:800px;width:100%;max-width:340px;margin-bottom:32px}
-.ci{position:relative;width:100%;aspect-ratio:3/4;transition:transform .7s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.gh{width:100%;display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.li{font-size:10px;letter-spacing:.12em;color:var(--ember);padding:4px 10px;border:1px solid rgba(224,154,100,.5);border-radius:50px;white-space:nowrap}
+.pb{flex:1;height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.pf{height:100%;width:0;background:linear-gradient(90deg,var(--ember),var(--rose-deep));border-radius:3px;box-shadow:0 0 10px rgba(224,154,100,.6);transition:width .5s ease}
+.pt{font-size:13px;color:var(--ember);min-width:36px;text-align:right}
+.dots{display:flex;gap:8px;margin-bottom:10px}
+.dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.12);transition:all .4s}
+.dots span.lit{background:var(--ember);box-shadow:0 0 8px rgba(224,154,100,.7)}
+.cc{font-size:11px;color:var(--text-dim);margin-bottom:14px;letter-spacing:.05em}
+.cs{perspective:900px;width:100%;max-width:340px;margin-bottom:28px}
+.ci{position:relative;width:100%;aspect-ratio:3/4;transition:transform .75s cubic-bezier(.35,0,.18,1);transform-style:preserve-3d}
 .ci.fl{transform:rotateY(180deg)}
-.cf{position:absolute;inset:0;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid rgba(201,169,110,.3);background:var(--card-bg)}
-.cb{background-image:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(201,169,110,.02) 8px,rgba(201,169,110,.02) 9px),repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(201,169,110,.02) 8px,rgba(201,169,110,.02) 9px);cursor:pointer}
-.cbi{font-size:36px;margin-bottom:16px;opacity:.7}
-.cbt{font-size:14px;color:var(--text-dim);letter-spacing:.1em;animation:pl 2s ease-in-out infinite}
+.cf{position:absolute;inset:0;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid rgba(216,176,140,.32);background:linear-gradient(165deg,var(--card1),var(--card2));box-shadow:0 14px 40px rgba(0,0,0,.45)}
+.cf::after{content:'';position:absolute;inset:9px;border:1px solid rgba(216,176,140,.16);border-radius:12px;pointer-events:none}
+.cb{cursor:pointer;background-image:radial-gradient(circle at 50% 38%,rgba(224,154,100,.10),transparent 55%),repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(216,176,140,.03) 9px,rgba(216,176,140,.03) 10px)}
+.cbi{font-size:36px;margin-bottom:16px;opacity:.8}
+.cbt{font-size:13px;color:var(--text-dim);letter-spacing:.14em;animation:pl 2.2s ease-in-out infinite}
 @keyframes pl{0%,100%{opacity:.4}50%{opacity:1}}
 .cfr{transform:rotateY(180deg)}
-.cb2{font-size:10px;letter-spacing:.1em;color:var(--gold);margin-bottom:12px;padding:4px 12px;border:1px solid var(--gold-dim);border-radius:50px}
-.ctt{font-size:11px;color:var(--text-dim);letter-spacing:.1em;margin-bottom:24px}
-.ct{font-size:22px;line-height:1.55;text-align:center;word-break:break-word}
-.cd{margin-top:24px;font-size:12px;color:var(--gold-dim);letter-spacing:.05em}
-.ac{display:flex;gap:16px;width:100%;max-width:340px}
+.cfr.evc{border-color:rgba(224,154,100,.6);background:linear-gradient(165deg,#33200f,#241408);box-shadow:0 14px 40px rgba(0,0,0,.45),0 0 30px rgba(224,154,100,.12)}
+.cb2{font-size:10px;letter-spacing:.1em;color:var(--ember);margin-bottom:12px;padding:4px 12px;border:1px solid rgba(224,154,100,.5);border-radius:50px}
+.ctt{font-size:11px;color:var(--text-dim);letter-spacing:.1em;margin-bottom:22px}
+.ct{font-size:21px;line-height:1.6;text-align:center;word-break:break-word}
+.cd{margin-top:22px;font-size:12px;color:var(--gold-dim);letter-spacing:.05em}
+.ac{display:flex;gap:16px;width:100%;max-width:340px;margin-bottom:14px}
 .bc,.bsk{flex:1;padding:14px;border-radius:50px;font-size:15px;font-family:inherit;cursor:pointer;transition:all .25s;letter-spacing:.05em}
-.bc{background:rgba(201,169,110,.12);border:1px solid var(--gold);color:var(--gold)}
-.bc:active{background:rgba(201,169,110,.25);transform:scale(.96)}
+.bc{background:rgba(224,154,100,.14);border:1px solid var(--ember);color:var(--ember)}
+.bc:active{background:rgba(224,154,100,.26);transform:scale(.96)}
 .bsk{background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--text-dim)}
 .bsk:active{border-color:rgba(255,255,255,.3);color:var(--text);transform:scale(.96)}
-.ov{display:none;position:fixed;inset:0;z-index:10;background:rgba(0,0,0,.88);flex-direction:column;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.btn-quit{background:none;border:none;color:rgba(168,145,138,.6);font-size:12px;font-family:inherit;cursor:pointer;letter-spacing:.08em;padding:6px}
+.ov{display:none;position:fixed;inset:0;z-index:10;background:rgba(10,6,5,.9);flex-direction:column;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .ov.on{display:flex}
 .pub{font-size:11px;letter-spacing:.18em;color:var(--red-bright);margin-bottom:20px;padding:6px 16px;border:1px solid var(--red);border-radius:50px}
-.puc{background:linear-gradient(160deg,#1a1015,#1a1218);border:1px solid rgba(139,58,58,.4);border-radius:16px;padding:36px 28px;max-width:320px;width:100%;text-align:center;margin-bottom:32px;animation:su .4s}
+.puc{background:linear-gradient(160deg,#2a1512,#221110);border:1px solid rgba(160,74,72,.45);border-radius:18px;padding:36px 28px;max-width:320px;width:100%;text-align:center;margin-bottom:32px;animation:su .4s}
 @keyframes su{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .put{font-size:20px;line-height:1.6}
-.bac{padding:14px 48px;border:1px solid var(--red);border-radius:50px;background:rgba(139,58,58,.15);color:var(--red-bright);font-size:15px;font-family:inherit;cursor:pointer;transition:all .25s}
-.bac:active{background:rgba(139,58,58,.3);transform:scale(.96)}
-.ei{font-size:48px;margin-bottom:20px}
-.et{font-size:28px;color:var(--gold);margin-bottom:8px}
-.es{font-size:14px;color:var(--text-dim);margin-bottom:40px;text-align:center;line-height:1.6}
-.br{padding:16px 48px;border:1px solid var(--gold);border-radius:50px;background:transparent;color:var(--gold);font-size:16px;font-family:inherit;cursor:pointer;transition:all .25s}
-.br:active{background:rgba(201,169,110,.12);transform:scale(.96)}
-.lb4{border-color:rgba(139,58,58,.4)}
-.lb4.sel{background:rgba(139,58,58,.2);border-color:var(--red-bright);color:var(--red-bright)}
-.note{font-size:11px;color:var(--text-dim);margin-top:8px;text-align:center;font-style:italic}
+.bac{padding:14px 48px;border:1px solid var(--red);border-radius:50px;background:rgba(160,74,72,.16);color:var(--red-bright);font-size:15px;font-family:inherit;cursor:pointer;transition:all .25s}
+.bac:active{background:rgba(160,74,72,.3);transform:scale(.96)}
+.ub{font-size:11px;letter-spacing:.2em;color:var(--ember);margin-bottom:18px}
+.ut{font-size:52px;letter-spacing:.18em;color:var(--rose);text-shadow:0 0 36px rgba(232,168,162,.5);margin-bottom:10px;animation:bloom 1s ease}
+@keyframes bloom{from{opacity:0;transform:scale(.86);filter:blur(6px)}to{opacity:1;transform:scale(1);filter:blur(0)}}
+.us{font-size:13px;color:var(--text-dim);letter-spacing:.12em;margin-bottom:40px}
+.bu{flex:none;padding:14px 56px}
+.ei{font-size:46px;margin-bottom:20px}
+.et{font-size:26px;color:var(--rose);margin-bottom:10px}
+.es{font-size:14px;color:var(--text-dim);margin-bottom:40px;text-align:center;line-height:1.8}
+.br{padding:16px 48px;border:1px solid var(--ember);border-radius:50px;background:transparent;color:var(--ember);font-size:16px;font-family:inherit;cursor:pointer;transition:all .25s}
+.br:active{background:rgba(224,154,100,.12);transform:scale(.96)}
+.lb4{border-color:rgba(160,74,72,.4)}
+.lb4.sel{background:rgba(160,74,72,.18);border-color:var(--red-bright);color:var(--red-bright);box-shadow:0 0 16px rgba(194,90,85,.2)}
+.note{font-size:11px;color:var(--text-dim);margin-top:8px;text-align:center;font-style:italic;line-height:1.7}
 .btn-custom{margin-top:16px;padding:10px 28px;border:1px solid rgba(255,255,255,.08);border-radius:50px;background:transparent;color:var(--text-dim);font-size:13px;font-family:inherit;cursor:pointer;transition:all .25s}
 .btn-custom:active{background:rgba(255,255,255,.04);color:var(--text)}
 .custom-list{width:100%;max-height:280px;overflow-y:auto;margin-bottom:20px}
@@ -91,18 +111,20 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 </head>
 <body>
 
+<div class="embers"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
 <div class="pg on" id="sPg">
   <div class="t1">升温</div>
   <div class="t2">卸甲 · 唤醒 · 浅尝 · 越界</div>
-  <div class="t3">选择阶段（可多选）</div>
+  <div class="t3">选择今晚的阶段（可多选）</div>
   <div class="lvs" id="lSel">
     <button class="lb sel" data-lv="1">卸甲</button>
     <button class="lb sel" data-lv="2">唤醒</button>
     <button class="lb sel" data-lv="3">浅尝</button>
     <button class="lb lb4" data-lv="4">越界</button>
   </div>
-  <div class="note">谁翻牌谁就是「主动方」</div>
-  <button class="bs" onclick="go()">开 始</button>
+  <div class="note">从最低的阶段开始——完成卡牌，积累温度<br>温度升满，才能走进下一阶段<br>谁翻牌谁就是「主动方」</div>
+  <button class="bs" onclick="go()">点 燃</button>
   <button class="btn-custom" onclick="show('cPg');loadCustom()">+ 自定义牌库</button>
 </div>
 
@@ -110,12 +132,13 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <div class="gh">
     <div class="li" id="li">卸甲</div>
     <div class="pb"><div class="pf" id="pf" style="width:0"></div></div>
-    <div class="pt" id="pt">0/0</div>
+    <div class="pt" id="pt">0°</div>
   </div>
+  <div class="dots" id="dots"></div>
   <div class="cc" id="cnt"></div>
   <div class="cs">
     <div class="ci" id="ci" onclick="flip()">
-      <div class="cf cb"><div class="cbi">🃏</div><div class="cbt">轻触翻开</div></div>
+      <div class="cf cb"><div class="cbi">🕯️</div><div class="cbt">轻触翻开</div></div>
       <div class="cf cfr" id="cFront">
         <div class="cb2" id="badge"></div>
         <div class="ctt" id="typeTag"></div>
@@ -125,9 +148,17 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
   </div>
   <div class="ac" id="ac" style="display:none">
-    <button class="bc" onclick="done()">完成</button>
-    <button class="bsk" onclick="skip()">跳过</button>
+    <button class="bc" id="dnB" onclick="done()">完成</button>
+    <button class="bsk" id="skB" onclick="skip()">跳过</button>
   </div>
+  <button class="btn-quit" onclick="end()">今晚到此为止</button>
+</div>
+
+<div class="ov" id="uOv">
+  <div class="ub">温 度 已 满</div>
+  <div class="ut" id="uTx">唤醒</div>
+  <div class="us">下一阶段，已经解锁</div>
+  <button class="bc bu" onclick="ackU()">继 续</button>
 </div>
 
 <div class="pg" id="xPg">
@@ -177,8 +208,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 var CARDS={1:[],2:[],3:[],4:[]};
 function A(t,c,d){return{t:t,c:c,d:d||null}}
 
-// ═══ L1 卸甲 (48) ═══ 打破日常,重新看见对方
-var L1=[
+// ═══ 旧版 L1（已停用，新版在 L3/L4 之后）═══
+var L1_legacy=[
 // — 看见 —
 A('truth','你上次盯着TA的脸超过十秒是什么时候？现在看。说一个你之前没注意到的细节。'),
 A('truth','TA今天做了一件什么小事让你心里动了一下？你当时为什么没说？'),
@@ -238,8 +269,8 @@ A('dare','翻牌人：把TA拉进怀里——不是要做什么，就是抱着�
 A('dare','两个人躺在床上。用同一个频率呼吸。吸气——停——呼气。谁先乱谁答应对方现在最想要的一件小事。'),
 ];
 
-// ═══ L2 唤醒 (48) ═══ 身体重新敏感起来
-var L2=[
+// ═══ 旧版 L2（已停用，新版在 L3/L4 之后）═══
+var L2_legacy=[
 // — 慢 —
 A('dare','用你能做到的最慢速度——从TA手腕摸到肩膀。慢到你能感觉到皮肤上每一根细毛。','F'),
 A('dare','TA闭眼。用指尖在TA背上写一个字——随便什么字。下笔越轻越好。轻到TA不确定你是不是真碰到了。TA来猜。','T'),
@@ -299,216 +330,312 @@ A('truth','你觉得自己身上最有弹性的地方是哪里？让TA捏一下�
 A('truth','如果只能留一种触感——被指尖划过、被掌心压住、还是被嘴唇贴着——你选哪个？'),
 ];
 
-// ═══ L3 浅尝 (48) ═══ 明确性行为、硬时限、进入边缘
+// ═══ L3 浅尝 ═══ 非进入性接触、贴身调情、高潮边缘控制
 var L3=[
-// — 自慰/观看 —
-A('dare','翻牌人：当着TA的面自慰一分钟。TA只能看、不许碰。时间到你立刻停——不管到没到。','F'),
-A('dare','TA在你面前自慰一分钟。你坐在刚好够不到的位置。不许碰自己也不许碰TA。就看。时间到你喊停。','T'),
-A('dare','两个人面对面同时自慰两分钟。不许碰对方。最后十五秒盯着对方的眼睛不许往下看。谁先低头谁给对方口一分钟。'),
-A('dare','背靠床头。让TA躺你两腿之间——TA自己抚慰自己。你在上面看着。一分钟。手放身体两侧不许动。','F'),
-A('truth','你自慰时最常想的是什么——具体动作、画面、声音、被人命令？说最近一次，不用包装。'),
+// — 看与展示 —
+A('truth','今晚你最想让TA认真看你身体的哪个部位？说出来，然后让TA只看不碰十秒。'),
+A('dare','翻牌人：让TA摆一个TA觉得最性感的姿势。你只负责看和夸，不许立刻上手。','F'),
+A('dare','两个人面对面，各自用手唤醒自己一分钟。可以看对方，但不许碰对方。时间到同时停。'),
+A('truth','你最想被TA看见的高潮前表情是什么样？害羞、失控、忍耐、还是挑衅？'),
+A('dare','翻牌人：打开房间里最柔和的一盏灯，让TA站在光下三十秒。你说出三个你想亲的位置。','F'),
 
-// — 用手 —
-A('dare','用手帮TA一分半钟。前三十秒只找TA最舒服的节奏，中间三十秒加速，最后三十秒反过来——越放越慢。TA告诉你哪段最让TA受不了。','F'),
-A('dare','TA用手帮你——但速度你说了算。快、慢、停都是你喊。一分钟。到点立刻停。','T'),
-A('dare','用手帮TA到TA快要失控的瞬间——立刻停。双手离开。十秒不许碰。然后问TA你现在最想要什么。TA说出来你再继续。','F'),
-A('dare','互相用手六十秒。同一个节奏——谁快了慢了都重来。像双人划船。时间到同时松手。'),
-A('truth','用手的时候你最在意什么？力度、角度、湿度、节奏、还是对方有没有在看你？'),
-A('dare','翻牌人：把两根手指放进TA身体里。另一只手放在TA肚子上。感受你手指动的时候TA腹肌的反应。一分钟。','F'),
-A('dare','TA握住你的手——带你去TA最想被你碰的位置。你闭眼跟着TA的力度和节奏走。一分钟。','T'),
-A('truth','TA用手帮你的时候——什么最需要改进？直接说，用能让TA下次照着做的方式说。'),
+// — 手与润滑 —
+A('dare','翻牌人：给TA一分半钟手上服务。前三十秒找节奏，中间三十秒加压力，最后三十秒只听TA口令。','F'),
+A('dare','TA握住你的手，带你去TA最想被触碰的位置。你闭眼跟着TA的力度、角度和速度走一分钟。','T'),
+A('dare','加入润滑。翻牌人只用一只手服务TA，另一只手固定在TA腰上，不许乱换位置。一分钟。','F'),
+A('dare','互相用手六十秒。规则是必须保持同一个节奏，谁乱了就停五秒再继续。'),
+A('truth','用手时你最想让TA改进什么？说到可执行：位置、力度、角度、湿度、节奏。'),
+A('dare','翻牌人：让TA报三个口令：快、慢、停。接下来一分钟你只服从这三个词。','F'),
+A('truth','你更喜欢被手掌压住，还是被指尖控制？让TA各试十秒后再回答。'),
 
-// — 用嘴 —
-A('dare','翻牌人：给对方口交一分钟。从你最想开始的地方开始。时间到嘴必须离开——不管TA到什么程度了。','F'),
-A('dare','TA给你口交一分钟。你必须说出一个具体偏好——更深、更浅、更快、更慢、手一起——TA照你说的做。','T'),
-A('dare','互相口交——一人三十秒。时间到换边。再来三十秒。然后同时停。不许有人继续。'),
-A('dare','翻牌人：从TA大腿内侧往上舔——每次只移动两厘米。TA说继续你继续。TA说停你停。不管停在哪。','F'),
-A('truth','口交的时候你最兴奋的是什么——被对方的表情盯着看、被吞没的感觉、被控制节奏、还是对方明显一副很想要你的样子？'),
-A('dare','翻牌人：含一口冰水——然后给TA口。冰水被体温捂热的那一刻立刻停。不许犹豫。','F'),
-A('dare','用手和嘴唇交替服务对方——每个部位碰一下，跳来跳去。让TA猜你下一步碰哪。猜对你停，猜错你加倍。四十秒。','F'),
-A('truth','你有没有一个口交时从没明确讲过的偏好？现在说到能被执行——位置、力度、节奏都说清楚。'),
+// — 口与舌 —
+A('dare','翻牌人：给TA一轮口上服务。从TA指定的位置开始，一分钟后必须停，停下后问TA刚才哪一下最有效。','F'),
+A('dare','TA给你一分钟口上服务。你必须给一个明确指令：更深、更浅、更慢、更快、手一起，五选一。','T'),
+A('dare','轮流服务对方。每人四十秒，时间到马上交换。第二轮必须比第一轮更慢。'),
+A('truth','口上服务时，最让你兴奋的是画面、声音、控制感、被取悦感，还是TA明显很投入？'),
+A('dare','翻牌人：从TA大腿内侧慢慢靠近。TA每说一次继续，你才能更近一点；TA说停就停在原处十秒。','F'),
+A('dare','用嘴唇和舌尖交替服务TA。每换一种方式前，先停两秒看TA反应。四十秒。','F'),
+A('truth','你一直没说出口的口上偏好是什么？今晚说到TA下次能照做。'),
 
-// — 蹭/体位/进入前 —
-A('dare','两个人只隔着内裤蹭两分钟。可以用任何角度——但不能进入。谁先伸手进去谁给对方口两分钟。'),
-A('dare','翻牌人：把TA压在身下，只用胯部慢慢蹭。一分钟内不许亲嘴——只能看TA的表情听TA的呼吸。','F'),
-A('dare','TA坐你身上但并不进入。TA决定摩擦的角度和节奏——你配合。九十秒后停。','T'),
-A('dare','翻牌人：让TA转身背对你。从背后贴上去，手从TA腋下穿到锁骨。慢慢顶住但不进入。保持三十秒。问TA要不要。','F'),
-A('truth','你喜欢被压在下面的感觉吗——身体的重量、逃不开的压迫、还是对方那种很想要你的气势？'),
-A('dare','翻牌人：选一个体位摆好——但停在进入前最后一厘米。保持不动二十秒。然后问TA：要还是不要。','F'),
+// — 贴身摩擦与姿势 —
+A('dare','翻牌人：选一个贴身姿势摆好。只允许拥抱、压住、摩擦和亲吻，保持十秒后问TA想不想加一点力度。','F'),
+A('dare','从背后抱住TA，身体完全贴上去。让TA用呼吸和扭动告诉你角度和节奏，三十秒后再问要不要继续。','F'),
+A('dare','TA坐在你身上，由TA决定贴近角度、摩擦范围和速度。你只能扶住TA，不许抢节奏。一分钟。','T'),
+A('dare','贴身摩擦三轮。每轮二十秒，中间完全停住五秒。每次重新开始前都要等TA说继续。','F'),
+A('dare','换一个平时很少用的贴身姿势。先试三十秒，不舒服立刻换回舒服的，不硬撑。'),
+A('truth','你最想试的贴身姿势是哪一种？站着、坐着、背后抱、面对面压住——说出你期待的感觉。'),
+A('dare','翻牌人：让TA选择上面、下面、侧面或背后贴近。你按TA选择来，不追加解释。','F'),
 
-// — 边缘/中断 —
-A('dare','用你能想到的最快方式把TA弄到失控边缘。TA一说快到了——你必须立刻停。双手离开。十秒后才允许继续。','F'),
-A('dare','TA服务你到快要失控——你必须喊停。喊晚了，下一张你只能服从TA下一张牌的指令。','T'),
-A('truth','你喜欢被吊在边缘不上不下的感觉吗？最想被吊多久？如果讨厌——讨厌的是哪部分？'),
-A('dare','翻牌人：给TA三轮刺激。每轮三十秒。每轮之间完全停十秒。第三轮后问TA想要继续还是直接进。','F'),
-A('dare','互相用手服务一分钟。谁先发出求饶的声音，谁就说一句今晚你最想说出来但一直没说的请求。'),
+// — 边缘与高潮控制 —
+A('dare','把TA带到快要失控的边缘，TA一说快到了你必须立刻停。停满十秒，再由TA决定继续还是换方式。','F'),
+A('dare','TA服务你到边缘。你必须主动喊停，喊晚了下一张牌由TA决定是否允许你跳过。','T'),
+A('dare','三轮边缘控制。每轮三十秒，中间完全停十秒。第三轮后，TA决定是释放、继续吊着，还是换你被服务。','F'),
+A('truth','你更想要哪种高潮：快而强、慢慢累积、被命令后释放、还是被看着释放？告诉TA怎么做。'),
+A('dare','翻牌人：接下来一分钟只做一件事，不换手法。TA只能用身体反应告诉你要不要继续。','F'),
+A('dare','同时服务彼此一分钟。谁先说出「我不行了」，谁就必须把最想要的结局讲清楚。'),
 
-// — 声音/语言 —
-A('dare','翻牌人：贴着TA耳朵——一边用手帮TA一边用最脏的词描述你正在做什么。不许停。三十秒。','F'),
-A('dare','TA闭眼。你用最低的气声描述接下来一分钟你想怎么碰TA。说完只执行你描述内容的前三十秒——然后停。','F'),
-A('dare','两个人各写一句今晚最想在床上听到的话。交换。把你收到的那句话原样说给对方听。'),
-A('truth','做的时候你希望TA叫你的名字、叫主人、叫老公老婆——还是不要叫，只用身体说话？现在告诉TA。'),
+// — 语言与命令 —
+A('dare','翻牌人：贴着TA耳朵，用最直接的语言描述你接下来想怎么要TA。说完只执行前三十秒。','F'),
+A('dare','TA闭眼。你给TA三个选择：手、嘴、贴身摩擦。TA只能选一个，你照做一分钟。','F'),
+A('truth','床上你最想听TA叫你什么？名字、老公老婆、主人、宝贝，还是某个只有你们懂的称呼？'),
+A('dare','两个人各写一句今晚最想听的话。交换后，必须原样说给对方听，不许改得更委婉。'),
+A('truth','你最想被TA命令的一句话是什么？说出来，让TA用那个语气重复一遍。'),
 
-// — 收束 —
-A('dare','翻牌人：认真问TA——现在是继续翻牌、还是放下牌直接开始做？TA的答案就是接下来五分钟的规则。','F'),
-A('truth','如果现在停止游戏立刻做——你最希望TA第一分钟做什么？说到TA不用猜。'),
-A('dare','两个人各自在手机备忘录写一句：我想让你现在…… 同时给对方看。选更想执行的那句。然后执行。'),
-A('dare','翻牌人：让对方躺在床上腿分开。你有两分钟——用你任何想用的方式帮TA。但每三十秒换一次手法。到点停。','F'),
-A('dare','同时互相口——六十秒。但你必须在对方嘴里的时候看着对方的脸。不许闭眼。谁先闭眼给对方多口一分钟。'),
-A('truth','你最喜欢在什么情况下到——是对方看着你的时候、从背后、还是被蒙着眼睛什么都不知道？'),
-A('dare','翻牌人：从背后进入——但只许进三次，每次不许超过十秒。三次之后必须退出来。用别的方式让TA到。','F'),
-A('dare','把手指放进对方身体——然后另一只手自慰。同步节奏。一分钟。时间到同时停。'),
-A('truth','做爱的时候你觉得自己最不敢直视对方的瞬间是什么——高潮的表情、刚进去的时候、还是结束后的安静？'),
-A('dare','翻牌人：用手帮对方——但要看着镜子里的自己。不看你手上的动作——看镜子里你自己的样子。一分钟。','F'),
-A('dare','站着。面对面。只许用胯部和大腿互相蹭——不许用手也不用嘴。谁先撑不住谁给对方口到对方满意。'),
-A('truth','你的身体今天最想要的是一个什么样的高潮——快的猛烈的、还是慢的累积的？告诉TA怎么给你。'),
+// — 收束与选择 —
+A('dare','翻牌人：认真问TA——继续翻牌、停牌继续调情、还是退回温柔拥抱？TA说了算，不能劝。','F'),
+A('truth','如果现在把游戏放下，你最希望TA第一分钟怎么继续升温？说到TA不用猜。'),
+A('dare','两个人各自在手机备忘录写一句：我想让你现在…… 同时给对方看。选更想执行的那句。'),
+A('dare','翻牌人：给TA两分钟完整服务。每三十秒必须换一次方式，到点停下问TA要不要继续。','F'),
+A('truth','做完之后你最想要的后续是什么：抱着、洗澡、继续第二轮、还是安静躺着？现在告诉TA。'),
+A('dare','最后一张浅尝牌：TA给你一个明确请求，你只能回答三个字：可以、慢点、不要。然后照答案执行。','T'),
 ];
 
-// ═══ L4 越界 (48) ═══ 权力/暴露/NTR/癖好/边界
+// ═══ L4 越界 ═══ 癖好开发、权力交换、私密幻想与安全边界
 var L4=[
 // — 边界/安全词 —
-A('truth','先说安全词。再说今晚越界里你最想试的方向：支配、束缚、疼痛、羞耻、角色、暴露、第三人、感官剥夺。'),
-A('truth','你今晚的硬边界是什么？说一个绝对不做的、一个可以试探的。'),
-A('dare','两个人各给今晚尺度打分——1是温柔、10是失控。取较低分数作为接下来牌的上限。'),
-A('dare','翻牌人：把TA的手放在你胸口。告诉TA你说停时希望TA怎么停、怎么抱你、怎么确认你没事。','F'),
+A('truth','先说安全词，再说今晚越界里最想试的方向：支配、臣服、束缚、感官、轻疼痛、羞耻、角色、玩具、幻想叙事。'),
+A('truth','今晚的硬边界是什么？说一个绝对不做的、一个可以试探的、一个需要随时确认的。'),
+A('dare','两个人各给今晚尺度打分，1是温柔，10是失控。取较低分作为上限，超过就自动降级。'),
+A('dare','翻牌人：把TA的手放在你胸口。告诉TA你说停时，TA要怎么停、怎么抱、怎么确认你没事。','F'),
+A('truth','今晚越界探索的目标是什么：找新癖好、释放压力、被占有、重新兴奋，还是验证一个幻想？'),
 
 // — 支配/臣服 —
-A('truth','你有没有幻想过对一个人拥有完全的支配权——TA是你的、什么都听你的。你想当上面还是下面？'),
-A('truth','如果今晚你拥有TA完全的支配权——五分钟后你下的第一个命令是什么？不许说不知道。'),
-A('truth','反过来——如果你被TA完全支配。你最怕TA命令你做什么？又最期待TA命令你做什么？'),
-A('dare','翻牌人：做五分钟主人。可以发任何口头命令。对方只能说"是"。完毕后角色互换。安全词始终有效。','F'),
-A('dare','翻牌人：让TA跪在你面前。看TA三十秒——不说话。然后说这三十秒里你最想命令TA做的事。','F'),
-A('dare','打TA屁股十下。前五下自己定力度。后五下TA来告诉你——再重点、再轻点、就对。','F'),
-A('dare','在TA身上吸一个吻痕——位置你选。吸到对方报颜色：粉(轻了)、红(正好)、紫(你是不是在报仇)。','F'),
-A('truth','你喜欢被占有感吗？哪句话最有反应：你是我的、别动、看着我、求我、你今天别想走了。'),
+A('truth','你更想支配TA，还是被TA支配？说清楚你想要的是命令、照顾、占有，还是失控感。'),
+A('truth','如果今晚你拥有五分钟支配权，第一个命令是什么？必须具体到动作和语气。'),
+A('truth','如果你被TA支配，你最怕TA命令什么？最期待TA命令什么？两个都要说。'),
+A('dare','翻牌人：做三分钟主人。只能下口头命令，不许强行拉扯。对方只能回答：是、慢点、停。','F'),
+A('dare','TA跪坐或坐低一点。你站着看TA三十秒，不触碰。然后说一句占有感最强的话。','F'),
+A('dare','翻牌人：给TA三个命令，分别是姿势、称呼、下一步动作。TA可以拒绝任何一个，被拒绝就换更温柔的版本。','F'),
+A('truth','哪句话最让你有反应：你是我的、别动、看着我、求我、听话、今晚交给我？选一句让TA说。'),
+A('dare','角色互换三分钟。刚才发命令的人现在只能服从，安全词和拒绝权始终有效。'),
 
 // — 束缚/限制 —
-A('truth','你想过把TA绑起来吗——绑床上、绑椅子上、还是绑着手就够？反过来你想过被绑吗？'),
-A('dare','用围巾或丝带把TA手松松绑在身前。绑好后让TA自己挣一下——确认能挣开才继续。','F'),
-A('dare','TA把你的双手绑在床头。你随时可以说停——但如果你不说，TA有一分钟为所欲为。','T'),
-A('truth','如果只能限制一个部位——手、眼、嘴、还是腿？为什么是那里？说具体的幻想场景。'),
+A('truth','你更想限制TA哪里：手、眼、嘴、腿，还是只能听命令不能主动碰？说为什么。'),
+A('dare','用围巾或丝带把TA双手松松绑在身前。绑好后必须让TA试着挣开，能挣开才继续。','F'),
+A('dare','TA限制你的双手一分钟。你随时可以说停；如果你不说，TA只能用事先同意的方式碰你。','T'),
+A('dare','翻牌人：让TA双手放在头顶一分钟。TA不能主动碰你，你决定什么时候奖励TA一次触碰。','F'),
+A('truth','被限制时，你更想听到安抚、命令、夸奖，还是带一点羞耻感的话？'),
 
 // — 感官剥夺 —
 A('dare','蒙上TA眼睛。你用手、嘴唇、冰、布料各碰一次。让TA猜。猜错不罚——只告诉你哪下最有感觉。','F'),
-A('dare','你蒙眼跪在地上。TA绕你走——不出声。你不知道TA在哪。TA可以随时碰你一下。碰完就走。三分钟。','T'),
-A('dare','关了所有灯——完全黑暗。在黑暗里做三分钟。你不知道TA用什么碰哪里。TA也不知道你的反应。不许说话。开灯后看对方表情。'),
+A('dare','你蒙眼。TA绕着你走，不出声。TA可以随时碰你一下，碰完就离开。两分钟。','T'),
+A('dare','关灯。接下来三分钟只靠声音、呼吸和触感互动。不许猜下一步，只能说继续、慢点、停。'),
 A('truth','看不见会让你更兴奋还是更紧张？如果紧张——TA做什么能让你放松？如果兴奋——你最期待TA做什么？'),
+A('dare','翻牌人：让TA戴上耳机或捂住耳朵。你只能用触碰发指令，TA猜错也不罚，只重新来。','F'),
 
 // — 疼痛/粗暴 —
-A('truth','痛感里你能接受到哪？拍、咬、抓、掐、拉头发——哪些可以、哪些不可以、哪些你想试试但不确定？'),
-A('truth','你有幻想过被粗暴对待吗——被按着、被翻过来、被不顾反应一直做？到什么程度你觉得过量了？'),
-A('dare','翻牌人：拍TA屁股十下。每下TA报力度——太轻、正好、太重。只按TA反馈调整。','F'),
-A('dare','TA抓住你的头发或后颈——不是拽，是控制。你告诉TA：继续、轻点、还是停。','T'),
-A('dare','翻牌人：咬TA一个允许的位置。先轻轻地——再问：能不能重一点？不能就换成亲。','F'),
+A('truth','痛感里你能接受到哪：拍、咬、抓、掐、拉头发？哪些可以，哪些只能幻想，哪些绝对不行？'),
+A('truth','你有幻想过被粗暴一点对待吗？说出能接受的动作、不能接受的力度、必须停止的信号。'),
+A('dare','翻牌人：拍TA屁股十下。每下TA报太轻、正好、太重。只按TA反馈调整，不许逞强。','F'),
+A('dare','TA抓住你的头发或后颈，不是硬拽，是控制方向。你必须告诉TA：继续、轻点、还是停。','T'),
+A('dare','翻牌人：咬TA一个允许的位置。先轻，再问能不能重一点；不能就换成亲和舔。','F'),
+A('truth','粗暴和失控的区别，对你来说在哪里？说出一条不能越过的线。'),
 
-// — 暴露/展示/公共 —
-A('truth','你有没有幻想过在公共场合做——餐厅、电影院、公园、公司会议室、飞机洗手间？哪个最刺激？'),
-A('truth','你想过被人看到吗——不是真的，是可控的。窗帘没拉、门没锁、隔壁有人？你更兴奋还是更紧张？'),
-A('truth','你敢不敢拍——不是给别人看，就是你们自己看。如果不拍——怕的是被泄露还是怕看到自己的样子？'),
-A('dare','打开手机前置镜头录像——只录一分钟。做最真实的你们。拍完一起回看。然后决定删还是不删。','F'),
-A('dare','把窗帘拉开——灯开着。让对方站在窗前。你在TA身后。让对面楼有概率看见你们。两分钟。不回头。','F'),
-A('dare','现在。就在这个房间。找一个不是床的角落——厨房台面、阳台墙、浴室。站在那里做。不许躺。两分钟。','F'),
+// — 展示/私密暴露 —
+A('truth','你有没有想过被TA完整地看着？不是给别人看，只在这个房间里，把羞耻交给TA。'),
+A('truth','你更喜欢开灯、半暗、还是完全黑？为什么这个光线会让你更兴奋？'),
+A('dare','翻牌人：让TA站在镜子前。你从背后抱住TA，只看镜子里的TA三十秒，然后说一句让TA脸红的话。','F'),
+A('dare','换到房间里一个不是床的位置：墙边、椅子、浴室门口或地毯。只做已经同意的动作，两分钟。','F'),
+A('truth','如果只允许你们自己回忆，不拍照不录像，你最想留下今晚哪个画面？描述给TA听。'),
 
-// — 第三者/NTR/交换幻想 —
-A('truth','你有没有幻想过第三个人？是看、是一起、还是你在旁边看TA跟别人——然后TA回来跟你描述细节？'),
-A('truth','你幻想过对方跟别人做、然后回来告诉你每一个步骤吗？你觉得自己会嫉妒、兴奋、还是两个都有？'),
-A('truth','你有没有想过让别人看着你们做？陌生人还是认识的人？如果是认识的——是谁？'),
-A('truth','你有没有对TA的某一个朋友或同事有过性的念头？是具体的某个人还是某种类型？'),
-A('truth','你想过交换吗——哪怕只是幻想层面。你觉得自己能接受吗？如果对方说想——你第一反应是什么？'),
-A('truth','如果对方告诉你TA之前跟别人做过某件从没跟你做过的事——你最不希望那件事是什么？'),
-A('dare','翻牌人：从你认识的人里选一个名字。告诉TA——如果你必须坐在旁边看TA跟那个人做，你觉得哪一刻你会先受不了。然后做一件宣誓主权的事。','F'),
+// — NTR/交换/第三人幻想（仅限口述幻想） —
+A('truth','第三人或交换幻想只停留在口述。你对这类幻想的反应是嫉妒、兴奋、抗拒，还是混合？'),
+A('truth','如果幻想里出现第三人，你更在意的是被看见、被比较、被争夺，还是TA回来重新选择你？'),
+A('truth','你能接受TA描述一个完全虚构的第三人幻想吗？哪些细节可以说，哪些细节不能说？'),
+A('dare','翻牌人：编一个完全虚构的嫉妒幻想。只讲权力感和占有感，不点现实人物。讲完立刻把TA抱回来。','F'),
+A('truth','如果TA说「我只是在幻想里试探，不代表现实想做」，你能接受到哪里？需要TA怎么安抚？'),
+A('dare','说一句宣誓主权的话。不是吵架，不是控制现实关系，只是在床上的角色台词。说完亲TA。'),
 
-// — 羞耻/贬低 —
-A('truth','羞辱会让你兴奋还是抵触？如果骂你——什么词最有感觉、什么词会让你立刻软掉？'),
-A('truth','你更喜欢被夸——乖、性感、下流、好吃、属于TA——还是被骂——骚、贱、荡妇、母狗？'),
-A('dare','翻牌人：在TA耳边用最脏的词夸TA——又脏又夸。说二十秒。然后亲TA说脏话的嘴。','F'),
-A('dare','两个人各写一个允许对方今晚使用的脏词。交换后只能用纸上写的——不许临时加码。'),
-A('truth','做爱的时候你最喜欢的语气是什么——命令你、求着你、骂着你、还是把你当宝贝一样哄？'),
+// — 羞耻/夸奖/脏话协议 —
+A('truth','羞耻感会让你兴奋还是退缩？说出可用词、谨慎词、绝对不能用的词。'),
+A('truth','你更喜欢被夸乖、性感、会勾人、属于TA，还是被命令、被逗弄、被一点点逼问？'),
+A('dare','两个人各写一个今晚允许使用的脏词和一个禁止使用的词。交换后只能用允许词，不许临时加码。'),
+A('dare','翻牌人：在TA耳边用又脏又宠的方式夸TA二十秒。重点是让TA更兴奋，不是让TA难受。','F'),
+A('truth','床上你最喜欢的语气是什么：命令、请求、嘲弄、夸奖、哄骗，还是占有？让TA试一句。'),
+A('dare','TA问你三个羞耻问题，你可以回答、拒绝或让TA换一个。回答一个，TA就奖励你一次触碰。','T'),
 
-// — 浏览器/手机暴露 —
-A('dare','给对方看你的浏览器搜索历史——最近七天。不许提前清理。现在把手机交给TA。','F'),
-A('dare','两人同时打开各自的手机相册——翻到一张你偷偷存起来的、跟性有关的图或视频。同时给对方看。不许解释——只许看。','F'),
-A('truth','你有没有偷偷搜过某个词然后立刻清掉历史？是什么词？说出来——这里没有评判。'),
-A('dare','各自打开浏览器搜索栏——打出你今晚最想搜但一直没搜的关键词。同时翻转屏幕给对方面前。然后聊你们看到的。','F'),
+// — 隐私/欲望坦白 —
+A('truth','你看片或幻想里最常出现的标签是什么？说一个愿意让TA知道的，不需要交出手机。'),
+A('truth','你有没有偷偷好奇过某种玩法，但一直怕TA觉得你过分？今晚只说好奇，不一定执行。'),
+A('dare','各自打开备忘录，写下一个想尝试但还没准备好执行的癖好。交换后只讨论，不马上做。'),
+A('truth','你有没有对某个身体部位有特别迷恋：脚、手、脖子、声音、气味、后背？说最强的一个。'),
+A('dare','翻牌人：拿出一个跟性有关的私人物品或网页给TA看。只解释为什么吸引你，不要求TA立刻接受。','F'),
 
 // — 癖好/禁忌 —
-A('truth','你最深层的性幻想是什么——那个你想想都觉得太过了的。试着说出来。不用包装。'),
-A('truth','你有没有一个从来没跟任何人说过、甚至自己都不太敢承认的癖好？今晚可以说。没人评判。'),
-A('truth','你自慰最频繁那段时间在想什么、想谁、用什么方式？说最近一次。'),
-A('truth','你看片最常点开的标签是什么？有没有哪种类型你一个人偷偷看但从不跟TA提？'),
-A('truth','你有没有对某个身体部位有特别迷恋——脚、手、脖子、声音、气味、后背？说最强的一个。'),
-A('truth','你觉得自己性方面最"变态"的是什么——用你自己的标准。你觉得TA知道吗？还是你一直藏着？'),
-A('dare','翻牌人：拿出一件你私藏的、跟性有关但TA不知道的东西——玩具、衣服、一本书、一个网页。给TA看。告诉TA你为什么藏它、有没有幻想过TA发现它。','F'),
-A('dare','关掉所有的灯。完全黑暗。接下来五分钟——你是陌生人。你们刚认识。怎么做——你自己定。','F'),
+A('truth','你最深层的性幻想是什么？先说场景和关系，不急着说动作。TA只负责听，不评价。'),
+A('truth','有没有一个你自己都不太敢承认的癖好？如果愿意，说到一级标题就够，不需要细节。'),
+A('truth','你觉得自己性方面最禁忌的地方是什么？它让你兴奋，是因为危险、羞耻、被控制，还是被完全接纳？'),
+A('dare','关灯。接下来三分钟你们是陌生人，但必须遵守现实边界。用新的称呼、新的语气、新的距离重新开始。'),
+A('dare','翻牌人：选一个你想开发的癖好，只做最轻的 10% 版本。做完立刻问TA：加码、保持、还是停止？','F'),
 
 // — 角色/幻想 —
-A('truth','你最想演的角色——不是职业，是权力关系：引诱、管教、陌生人、占有、服务、猎物。'),
-A('dare','翻牌人：立刻挑一个角色——你现在就是那个人。TA用最入戏的方式跟你互动三分钟。谁先笑谁答应对方一个要求。','F'),
-A('dare','TA给你一个身份。你必须用这个身份说一句邀请TA继续的话。说完TA决定要不要接戏。','T'),
-A('truth','你有没有一个跟TA有关但从没说出口的幻想场景？地点、姿势、语气——至少说三个细节。'),
+A('truth','你最想演的角色关系是什么：引诱者、管教者、服务者、猎物、主人、被占有的人？'),
+A('dare','翻牌人：立刻挑一个角色。TA用最入戏的方式跟你互动三分钟。谁先笑，谁满足对方一个小要求。','F'),
+A('dare','TA给你一个身份。你必须用这个身份说一句邀请TA继续的话。说完TA决定接不接戏。','T'),
+A('truth','你有没有一个跟TA有关但从没说出口的幻想场景？地点、姿势、称呼、语气，至少说三个细节。'),
+A('dare','两个人用完全不同于平时的称呼说话三分钟。不许用日常昵称，像第一次偷情一样重新勾引。'),
 
 // — 玩具/道具 —
-A('truth','你对玩具最感兴趣的是什么——震动、束缚、插入、遥控、还是看TA用？说最想试的。'),
-A('dare','拿出一个可用道具。翻牌人用这个道具碰TA身体的任何位置。不许进入——就碰。一分钟。','F'),
-A('dare','翻牌人：专注服务TA一个非性器官的迷恋部位——像那里就是今晚唯一的入口。六十秒。','F'),
+A('truth','你对玩具最感兴趣的是什么：震动、束缚、插入、遥控、还是看TA使用？说最想试的一个。'),
+A('dare','拿出一个可用道具。翻牌人先只用它碰TA非性器官位置一分钟，确认TA喜欢后再决定是否升级。','F'),
+A('dare','如果有震动玩具，TA来控制开关和档位一分钟；如果没有，就用手模拟三档节奏。','T'),
+A('dare','翻牌人：专注服务TA一个迷恋部位，像那里就是今晚唯一入口。六十秒后问TA要不要转移。','F'),
+A('truth','如果买一个新玩具，你更想买给自己用、给TA用、一起用，还是让TA遥控？'),
 
 // — 复盘/后照顾 —
 A('dare','越界暂停。两人各说一句：刚才让我更兴奋的是…… 让我需要确认的是…… 说完再继续。'),
 A('truth','如果今晚试了新癖好——结束后你希望TA怎么照顾？抱着、夸你、洗澡、聊天、安静陪着？'),
 A('dare','翻牌人：抱住TA三十秒——问TA要继续加码、保持尺度、还是退回浅尝。TA说了算。','F'),
 A('truth','今晚你发现自己可能喜欢的新东西是什么？哪怕只有百分之一的喜欢——也说出来。'),
+A('dare','做一个降级动作：亲额头、喝水、抱紧、盖被子，四选一。越界不是一直加码，也可以稳住。'),
+];
+
+// ═══ L1 卸甲（新版）═══ 放下日常的壳，重新看见对方
+var L1=[
+// — 看见 —
+A('truth','现在看TA十秒。说一个这张脸上比去年更让你喜欢的地方。'),
+A('truth','TA最近一次让你心里一软是什么时候？当时你为什么没说出来？'),
+A('dare','翻牌人：把TA的头发别到耳后——不管需不需要。然后说你第一次想这么做是什么时候。','F'),
+A('truth','如果明天你们要进行第一次约会——你会带「现在的TA」去哪里？为什么是那儿？'),
+A('dare','交换手机，各自给对方拍一张现在的样子。不许删，不许修。这就是今晚的纪念。'),
+A('truth','TA的笑、TA认真的侧脸、TA刚睡醒的样子——选一个你最舍不得的。说为什么。'),
+A('dare','翻牌人：捧起TA的脸看十秒，什么都不做。然后说一句以「我从来没告诉过你」开头的话。','F'),
+A('truth','你们刚认识时，你最想给TA留下什么印象？你觉得TA真正记住的是什么？'),
+// — 回忆 —
+A('truth','第一次牵手是谁先伸的手？当时你心跳什么样——现在牵着，再说一遍。'),
+A('truth','你们最好的一次出行里——你印象最深的不是风景，是TA的哪个瞬间？'),
+A('dare','数三声，同时说出你们俩「最有故事」的那首歌。不一样的话——两首都放，抱着听完。'),
+A('truth','哪一刻你确定「就是这个人了」？那天TA穿什么、说了什么？'),
+A('dare','翻牌人：复刻你们第一次接吻——位置、力度、时长，越像越好。然后问TA还原度打几分。','F'),
+A('truth','你们有没有一个只有你们俩懂的词或梗？说说它的来历——谁先笑，谁亲对方一下。'),
+A('truth','如果能回到过去，对刚在一起的你们说一句话——你会说什么？'),
+// — 坦白 —
+A('truth','你最近一次因为TA偷偷开心是什么时候？开心到什么程度？'),
+A('truth','有没有一句话你在心里练过很多遍，但一直没说出口？今晚的额度是一句。'),
+A('truth','你最怕TA发现你什么——不是秘密，是某个习惯，或者软肋？'),
+A('truth','这段感情里，你最骄傲自己做对了什么？'),
+A('truth','你有没有偷偷羡慕过别的情侣什么？说出来——看看我们能不能也有。'),
+A('dare','各自写下「我希望我们今年一起完成的一件事」。交换。两件都要认真对待。'),
+A('truth','你觉得TA最近累在哪里？你想为这件事做点什么？'),
+A('truth','哪个瞬间你觉得「TA比我自己更懂我」？'),
+// — 靠近 —
+A('dare','翻牌人：从背后抱住TA，下巴搁在TA肩上，跟着TA的呼吸调整你的呼吸。同步了，就在耳边说一句话。','F'),
+A('dare','额头贴额头，闭眼一分钟。谁都不许说话。睁眼后——先笑的人说三遍「我爱你」。'),
+A('dare','翻牌人：牵TA的手贴在你心口，让TA数十次心跳。然后说，这颗心最近在为什么事跳得快。','F'),
+A('dare','关掉大灯，只留一盏。慢舞一支歌——没有音乐就哼。脚步乱了没关系，抱紧就行。'),
+A('dare','翻牌人：亲TA三个地方——额头、手背、最后一个你自己选。每亲一个，说一个喜欢TA的理由。','F'),
+A('dare','十指相扣举到眼前，看你们的手三十秒。然后各说一件「这双手为我做过」的事。'),
+A('dare','让TA把头枕在你腿上。你梳TA的头发，聊聊你们下一次想一起去的地方。','T'),
+A('dare','拥抱，直到对方身体放松下来——你能感觉到那个瞬间。感觉到了，就轻拍两下背。'),
+A('dare','两个人钻进同一条毯子。手机放远点。聊一个以「等我们老了」开头的话题，聊够两分钟。'),
+];
+
+// ═══ L2 唤醒（新版）═══ 慢下来，让身体重新敏感
+var L2=[
+// — 慢 —
+A('dare','用最慢的速度，从TA的手腕摸到肩膀——慢到能数清楚每一寸。','F'),
+A('dare','翻牌人：让TA闭眼。用指尖在TA手心写一个字——笔画越轻越好。猜对才算完成。','F'),
+A('dare','掌心贴掌心，慢慢摩擦十秒，再十指交扣慢慢收紧。感受温度怎么变。'),
+A('dare','翻牌人：用拇指沿TA的眉骨、鼻梁、下颌线走一遍——像在描一幅画。','F'),
+A('dare','TA用指尖从你的后颈滑到后背——你只能用呼吸回应，不许说话。','T'),
+A('dare','互相整理对方的头发、衣领——像出门前那样。但要慢十倍。'),
+// — 轻 —
+A('dare','凑近TA的耳朵——不碰到——慢慢呼一口气。看TA起不起鸡皮疙瘩。','F'),
+A('dare','用嘴唇轻碰TA的耳垂，一秒就离开。然后看着TA的眼睛，数三秒。','F'),
+A('dare','把你的嘴唇停在离TA嘴唇一厘米的地方，保持十秒。谁先吻上谁输——输的人下一张牌不许跳过。','F'),
+A('dare','互相用睫毛刷对方的脸颊——蝴蝶吻。痒也不许躲。'),
+A('dare','翻牌人：用一根手指轻轻抬起TA的下巴——用眼神把想说的话说完，再放下。','F'),
+// — 温度 —
+A('dare','搓热你的双手，捂住TA的后颈十秒。再用刚洗过冷水的手来一次——问TA更喜欢哪个。','F'),
+A('dare','把你身上最暖的地方，贴在TA最凉的地方。各自报位置，不许笑。'),
+A('dare','翻牌人：对着TA的后颈呵一口热气，再轻轻吹一口凉气。问TA哪一下让TA抖了。','F'),
+A('dare','翻牌人：握住TA的手放在你脸上，闭眼三十秒。让TA感受你脸颊的温度变化。','F'),
+// — 玩 —
+A('dare','TA蒙上你的眼睛，用三样东西轻碰你的手背——你猜。全猜对TA亲你，猜错你亲TA。','T'),
+A('dare','面对面坐着，轮流在对方身上找一个「从来没被认真注意过」的地方——耳后、膝盖窝、手肘内侧。轻碰十秒，对方打分。'),
+A('dare','翻牌人：闭眼，用鼻尖从TA的手腕走到肩膀——全程靠触觉导航。','F'),
+A('dare','背贴背坐着，感受对方的呼吸和体温一分钟。然后同时转头——看会不会撞上。'),
+A('dare','翻牌人：在TA背上用手指写一句话——完整的一句。TA猜对了才能翻下一张。','F'),
+A('dare','石头剪刀布，三局。赢的人指定对方亲自己哪里——限脖子以上。'),
+// — 贴近 —
+A('dare','翻牌人：把TA拉进怀里坐好，环住TA，下巴抵着TA的发顶。保持一首歌的时间。','F'),
+A('dare','吻TA的脖子一下——位置自己选。亲完，在耳边说出你为什么选那里。','F'),
+A('dare','接一个吻——规则是全程要慢，慢到像第一次。谁先加速，谁重来。'),
+A('dare','让TA给你按摩肩膀一分钟。结束时TA会亲你的后颈——你不许提前回头。','T'),
+A('dare','抱着接吻一分钟——手放在对方背上不许动。结束后谁都不许先松手，看谁撑得久。'),
+A('truth','刚才这些里——哪一下最让你心跳快？让TA再做一次。'),
+A('truth','你的身体今晚哪里最想被温柔对待——脖子以上选一个地方，告诉TA。'),
+A('truth','你更喜欢被怎么碰——若有似无的轻，还是踏实安稳的重？让TA各试一次再回答。'),
+A('dare','翻牌人：在TA耳边用气声说一句你今晚还想做的事——说完装作什么都没发生，翻下一张。','F'),
+];
+
+// ═══ 事件卡 ═══ fx: mult2=下张双倍 / heat3=直接升温 / swap2=交换主动权
+var EVENTS=[
+{c:'「对视」计时六十秒，看着对方的眼睛，不许说话不许笑。先笑的人——下一张牌不许跳过。',fx:null},
+{c:'「双倍升温」烛火忽然窜高——下一张完成的牌，温度翻倍。',fx:'mult2'},
+{c:'「心愿」对方现在说一个三十秒内能实现的小心愿——你来完成它。',fx:null},
+{c:'「回忆」说出你们刚在一起时的一个细节，对方补充一个。谁说不上来，谁抱对方十秒。',fx:null},
+{c:'「静默」下一张牌全程不许说话——只能用动作和眼神完成。',fx:null},
+{c:'「主动权」风向变了——接下来两张牌，主动方互换。',fx:'swap2'},
+{c:'「快进」积攒的热度突然涌上来——温度直接 +3°。',fx:'heat3'},
+{c:'「慢下来」喝口水，靠在一起休息一分钟。游戏不会跑掉，TA也不会。',fx:null},
+{c:'「二选一」对方给你出两个同等尺度的选择——你必须选一个执行。',fx:null},
+{c:'「镜像」下一张牌，两个人同时做——做给对方看。',fx:null},
 ];
 
 CARDS[1]=L1;CARDS[2]=L2;CARDS[3]=L3;CARDS[4]=L4;
 
-// ═══ 惩罚卡 (25) ═══
+// ═══ 惩罚卡 ═══ 跳过后的成人小惩罚，仍保留拒绝和降级
 var PUN=[
 '脱一件衣服。下一轮也不能穿回去。',
 '让TA在你身上任选位置留一个吻痕。必须吸到变色。',
 '用嘴唇帮TA脱一件衣物。不许用手。',
 '跪床上看着TA说三遍我错了。一遍比一遍小声。',
-'让TA用你身体当画布，在上面用手指写一个下流的词。你猜对才算完。',
-'蒙眼一分钟——完全任由TA摆布。不许出声。',
+'让TA用你身体当画布，在允许的位置写一个下流的词。你猜对才算完。',
+'蒙眼一分钟。TA只能用你们刚才同意过的方式碰你，你只能说继续、慢点、停。',
 '脱光上衣保持两分钟。TA可以看可以说但不能碰。你也不能遮。',
-'无条件听TA下一句话。任何事。就一件。',
+'听TA下一句话，但只限今晚已同意的床上指令。你可以说慢点或停。',
 '当着TA的面自慰三十秒。TA只能看不能帮。',
 '用你最羞耻但最诱惑的姿势趴着。保持一分钟。TA可以在旁边说感受。',
 '帮TA把全身衣服脱光。用最慢的速度。慢到TA想推你。',
-'TA坐床边——你跪TA面前。接下来两分钟你是TA的。',
+'TA坐床边，你跪坐在TA面前。接下来两分钟你只听三个词：靠近、停下、继续。',
 '把最不敢说的一个幻想凑到TA耳边说出来。声音小到自己都快听不见。',
-'让TA打你屁股五下。每下自己报数。不够响就重来。',
+'让TA拍你屁股五下。每下你报力度：轻了、正好、重了。只按你的反馈来。',
 '找一个你自己都不太熟的敏感位置——让TA探索。找到了就停。',
-'开灯。站TA面前不许遮。被注视三十秒。之后TA决定做什么。',
-'把你手交给TA。TA抓着你的手去碰TA想被你碰的地方。你是木偶。',
+'开灯。站TA面前不许遮。被注视三十秒。之后TA只能提出一个你可以接受的请求。',
+'把你手交给TA。TA抓着你的手去碰TA想被你碰的地方。你可以随时收回手。',
 '给TA跳一分钟的舞。没有音乐。只有灯光和呼吸。',
 '让TA用舌尖在你背上写一个词。猜对才算完。猜错继续。',
 '用冰凉的指尖在TA身上画一条线——颈后到脚踝。不许停。',
 '拿一件你从没敢穿的东西——现在穿给TA看。',
-'躺平闭眼放松。接下来一分钟你不知道TA会用什么方式碰你。',
-'坦白一个你从未对任何人说过的性幻想。不能反悔。',
+'躺平闭眼放松。接下来一分钟TA只能用一种触感碰你，你猜是哪一种。',
+'坦白一个你从未对TA说过的性幻想。可以只说标题，不用立刻执行。',
 '让TA同时碰你身上两个不相邻的地方。你不许动只能感受。',
 '说一个你希望TA在床上改的习惯——用最温柔的语气、说真话。',
+'让TA给你一个新称呼。下一张牌之前，你只能用这个称呼回应TA。',
+'用最慢的速度亲TA从耳后到锁骨的一段路。TA说停就停。',
+'跪坐或坐低一点，让TA用一句话命令你抬头看TA。照做十秒。',
+'把你最想被碰的位置指给TA看，但TA只能看十秒，不能马上碰。',
+'TA选一个你今晚可以接受的脏词。你要把它贴着TA耳朵说三遍。',
 ];
 
 // ═══ 游戏 ═══
-var P_LEVEL=16;
-var st={lv:[1,2,3],dk:[],i:0,f:false,c:0,s:0,x:false};
+var HEAT_NEED=8;      // 升满温度所需
+var PER_STAGE=12;     // 每阶段抽牌数
+var EV_CHANCE=0.22;   // 事件卡出现概率
+var st={lv:[1,2,3],q:[],qi:0,heat:0,total:0,dk:[],i:0,f:false,c:0,s:0,x:false,mult:1,swap:0,le:false};
 function LvName(v){return['','卸甲','唤醒','浅尝','越界'][v]}
 function shuf(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t}return b}
 function getCustom(){try{return JSON.parse(localStorage.getItem('cpCds')||'[]')}catch(e){return[]}}
 function saveCustom(arr){localStorage.setItem('cpCds',JSON.stringify(arr))}
 function cardWithLevel(c,lv){return{t:c.t,c:c.c,d:c.d||null,l:c.l||lv}}
-function build(){
-  var lvs=st.lv.slice().sort(function(a,b){return a-b});
-  var dk=[];
+function buildStage(lv){
+  var pool=CARDS[lv].slice();
   var cust=getCustom();
-  for(var li=0;li<lvs.length;li++){
-    var lv=lvs[li];var pool=CARDS[lv].slice();
-    // mix in custom cards for this level
-    for(var ci=0;ci<cust.length;ci++){if(cust[ci].l==lv)pool.push(cust[ci])}
-    var draw=shuf(pool).slice(0,P_LEVEL);
-    for(var di=0;di<draw.length;di++)dk.push(cardWithLevel(draw[di],lv));
-  }
+  for(var ci=0;ci<cust.length;ci++){if(cust[ci].l==lv)pool.push(cust[ci])}
+  var draw=shuf(pool).slice(0,PER_STAGE);
+  var dk=[];
+  for(var di=0;di<draw.length;di++)dk.push(cardWithLevel(draw[di],lv));
   return dk;
 }
 function loadCustom(){
@@ -565,46 +692,119 @@ function show(id){
   for(var i=0;i<ps.length;i++)ps[i].classList.remove('on');
   document.getElementById(id).classList.add('on');
 }
+function curLv(){return st.q[st.qi]}
+function isLast(){return st.qi>=st.q.length-1}
 function updFront(){
   if(st.i>=st.dk.length)return;
   var c=st.dk[st.i];
-  document.getElementById('badge').textContent='Lv.'+c.l+' · '+LvName(c.l);
-  document.getElementById('typeTag').textContent=c.t==='truth'?'真心话':'大冒险';
+  var f=document.getElementById('cFront');
+  if(c.t==='event'){
+    f.classList.add('evc');
+    document.getElementById('badge').textContent='🕯️ 事 件';
+    document.getElementById('typeTag').textContent='命运拨弄';
+    document.getElementById('dir').textContent='';
+  }else{
+    f.classList.remove('evc');
+    document.getElementById('badge').textContent='Lv.'+c.l+' · '+LvName(c.l);
+    document.getElementById('typeTag').textContent=c.t==='truth'?'真心话':'大冒险';
+    var d='';
+    if(c.d==='F')d=st.swap>0?'对方 → 翻牌人 ⇄':'翻牌人 → 对方';
+    else if(c.d==='T')d=st.swap>0?'翻牌人 → 对方 ⇄':'对方 → 翻牌人';
+    document.getElementById('dir').textContent=d;
+  }
   document.getElementById('ctxt').textContent=c.c;
-  var d='';
-  if(c.d==='F')d='翻牌人 → 对方';
-  else if(c.d==='T')d='对方 → 翻牌人';
-  document.getElementById('dir').textContent=d;
   var el=document.getElementById('li');
-  el.textContent='Lv.'+c.l+' · '+LvName(c.l);
-  var cc={1:'var(--gold-dim)',2:'var(--gold)',3:'var(--red-bright)',4:'var(--red)'};
-  el.style.borderColor=cc[c.l]||'var(--gold-dim)';
-  el.style.color=cc[c.l]||'var(--gold-dim)';
+  el.textContent='Lv.'+curLv()+' · '+LvName(curLv());
 }
 function updProg(){
-  var pct=st.dk.length>0?Math.round((st.i/st.dk.length)*100):0;
+  var pct=Math.min(100,Math.round(st.heat/HEAT_NEED*100));
   document.getElementById('pf').style.width=pct+'%';
-  document.getElementById('pt').textContent=st.i+'/'+st.dk.length;
-  document.getElementById('cnt').textContent=st.dk.length>0?'第 '+(st.i+1)+' / '+st.dk.length+' 张':'';
+  document.getElementById('pt').textContent=st.heat+'°';
+  var msg;
+  if(isLast()){msg='最终阶段 · 第 '+(st.i+1)+' 张';}
+  else{var left=Math.max(0,HEAT_NEED-st.heat);msg='第 '+(st.i+1)+' 张 · 距下一阶段还差 '+left+'°';}
+  document.getElementById('cnt').textContent=msg;
+}
+function drawDots(){
+  var el=document.getElementById('dots');el.innerHTML='';
+  for(var i=0;i<st.q.length;i++){var s=document.createElement('span');if(i<=st.qi)s.className='lit';el.appendChild(s)}
+}
+function resetCard(){
+  st.f=false;
+  document.getElementById('ci').classList.remove('fl');
+  document.getElementById('ac').style.display='none';
+}
+function addHeat(n){
+  var g=n*st.mult;st.mult=1;
+  st.heat+=g;st.total+=g;updProg();
+}
+function loadStage(){
+  st.dk=buildStage(curLv());
+  if(st.dk.length===0){end();return}
+  st.i=0;resetCard();drawDots();updFront();updProg();
 }
 function startGame(){
-  st.dk=build();if(st.dk.length===0)return;
-  st.i=0;st.f=false;st.c=0;st.s=0;
-  show('gPg');document.getElementById('ac').style.display='none';
-  document.getElementById('pf').style.width='0%';
-  document.getElementById('pt').textContent='0/'+st.dk.length;
-  document.getElementById('ci').classList.remove('fl');
-  updFront();updProg();
+  st.q=st.lv.slice().sort(function(a,b){return a-b});
+  st.qi=0;st.heat=0;st.total=0;st.c=0;st.s=0;st.mult=1;st.swap=0;st.le=false;
+  show('gPg');loadStage();
 }
 function go(){if(st.lv.indexOf(4)!==-1&&!st.x){show('xPg');return}startGame()}
 function ackX(){st.x=true;startGame()}
 function cancelX(){show('sPg')}
-function flip(){if(st.f)return;st.f=true;document.getElementById('ci').classList.add('fl');document.getElementById('ac').style.display='flex';}
-function nxt(){st.i++;st.f=false;updProg();if(st.i>=st.dk.length){end();return}document.getElementById('ci').classList.remove('fl');document.getElementById('ac').style.display='none';updFront();}
-function done(){st.c++;nxt()}
+function flip(){
+  if(st.f)return;st.f=true;
+  document.getElementById('ci').classList.add('fl');
+  document.getElementById('ac').style.display='flex';
+  var ev=st.dk[st.i]&&st.dk[st.i].t==='event';
+  document.getElementById('skB').style.display=ev?'none':'';
+  document.getElementById('dnB').textContent=ev?'收 下':'完成';
+}
+function maybeEvent(){
+  if(EVENTS.length&&!st.le&&Math.random()<EV_CHANCE){
+    var e=EVENTS[Math.floor(Math.random()*EVENTS.length)];
+    st.dk.splice(st.i,0,{t:'event',c:e.c,fx:e.fx,l:curLv()});
+    st.le=true;
+  }else{st.le=false}
+}
+function applyEvent(c){
+  if(c.fx==='mult2')st.mult=2;
+  else if(c.fx==='heat3')addHeat(3);
+  else if(c.fx==='swap2')st.swap=2;
+}
+function advance(){
+  var c=st.dk[st.i];
+  if(st.swap>0&&c&&c.t!=='event')st.swap--;
+  if(!isLast()&&st.heat>=HEAT_NEED){unlock();return}
+  st.i++;
+  if(st.i>=st.dk.length){
+    if(!isLast()){unlock()}else{end()}
+    return;
+  }
+  maybeEvent();
+  resetCard();updFront();updProg();
+}
+function done(){
+  var c=st.dk[st.i];
+  if(c.t==='event'){applyEvent(c)}
+  else{st.c++;addHeat(c.t==='truth'?1:2)}
+  advance();
+}
 function skip(){st.s++;var p=PUN[Math.floor(Math.random()*PUN.length)];document.getElementById('pTx').textContent=p;document.getElementById('pOv').classList.add('on');}
-function accP(){document.getElementById('pOv').classList.remove('on');nxt()}
-function end(){show('ePg');document.getElementById('eSt').innerHTML='完成了 <b>'+st.c+'</b> 张牌<br>跳过了 <b>'+st.s+'</b> 次——有乖乖受罚吧？';}
+function accP(){document.getElementById('pOv').classList.remove('on');addHeat(1);advance()}
+function unlock(){
+  document.getElementById('uTx').textContent=LvName(st.q[st.qi+1]);
+  document.getElementById('uOv').classList.add('on');
+}
+function ackU(){
+  document.getElementById('uOv').classList.remove('on');
+  st.qi++;st.heat=0;st.le=false;
+  loadStage();
+}
+function end(){
+  show('ePg');
+  var reach=st.q.length?LvName(st.q[st.qi]):'';
+  document.getElementById('eSt').innerHTML='完成 <b>'+st.c+'</b> 张 · 跳过 <b>'+st.s+'</b> 次<br>今晚一共升温 <b>'+st.total+'°</b>'+(reach?'<br>走到了「'+reach+'」':'');
+}
 function re(){st.x=false;show('sPg')}
 
 var bs=document.querySelectorAll('.lb');
